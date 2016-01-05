@@ -1,0 +1,18 @@
+language: java
+sudo: required
+services:
+  - docker
+node_js:
+  - "stable"
+notifications:
+  slack: animenfance:5XpEfsL90X6C7qGqEAJ76ZRS
+cache:
+  directories:
+    - $HOME/.m2
+script:
+  - mvn test
+#  - docker build -t michaelcoll/anim-enfance-front:latest .
+#  - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/anim-enfance-front:latest michaelcoll/anim-enfance-front:$TRAVIS_TAG ; fi
+#after_success:
+#  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+#  - docker push michaelcoll/anim-enfance-front
