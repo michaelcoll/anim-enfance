@@ -1,0 +1,23 @@
+
+spring:
+  datasource:
+    driverclassname: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo
+    username: local-user
+    password: localpassword
+    platform: mysql
+    initialize: false
+    maximum-pool-size: 10
+server:
+  port: 8090
+
+---
+spring:
+  profiles: container
+  datasource:
+    driverclassname: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_PORT_3306_TCP_ADDR}:${MYSQL_PORT_3306_TCP_PORT}/${MYSQL_ENV_MYSQL_DATABASE}
+    username: ${MYSQL_ENV_MYSQL_USER}
+    password: ${MYSQL_ENV_MYSQL_PASSWORD}
+    initialize: true
+    maximum-pool-size: 10
