@@ -2,22 +2,28 @@
 spring:
   datasource:
     driverclassname: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/local
-    username: local-user
-    password: localpassword
+    url: jdbc:mysql://localhost:3316/local
+    username: local
+    password: local
     platform: mysql
     initialize: false
     maximum-pool-size: 10
+
 server:
-  port: 8090
+  port: 8080
+
+mybatis:
+  mapper-locations:
+    - fr/animenfance/dao/PartenaireDao.xml
+  type-aliases-package: fr.animenfance.bean
 
 ---
 spring:
   profiles: container
   datasource:
     driverclassname: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://${DB_PORT_3306_TCP_ADDR}:${DB_PORT_3306_TCP_PORT}/${DB_ENV_MYSQL_DATABASE}
-    username: ${DB_ENV_MYSQL_USER}
-    password: ${DB_ENV_MYSQL_PASSWORD}
+    url: jdbc:mysql://db:3306/${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
     initialize: true
     maximum-pool-size: 10
