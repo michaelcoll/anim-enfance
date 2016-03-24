@@ -1,12 +1,18 @@
 package fr.animenfance.controller;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,21 +21,36 @@ import fr.animenfance.exception.PartenaireNotFoundException;
 import fr.animenfance.service.PartenaireService;
 
 @RestController
-@RequestMapping("/partenaires")
 public class PartenaireController {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(PartenaireController.class);
 
   @Autowired
   private PartenaireService service;
 
-  @RequestMapping("/{id}")
-  public Partenaire getById(@PathVariable Long id) throws PartenaireNotFoundException {
-    return service.getById(id);
+  @RequestMapping(value = "/partenaires/{id}",
+    method = GET,
+    produces = APPLICATION_JSON_VALUE)
+  public Callable<ResponseEntity<Partenaire>> getById(final @PathVariable Integer id) {
+    return () -> {
+      try {
+        return ResponseEntity.ok(service.getById(id));
+      } catch (PartenaireNotFoundException e) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
+    };
   }
 
-  @RequestMapping
-  public Callable<List<Partenaire>> list() {
-    return service::list;
+  @RequestMapping(value = "/partenaires", method = GET, produces = APPLICATION_JSON_VALUE)
+  public Callable<ResponseEntity<List<Partenaire>>> list() {
+    return () -> ResponseEntity.ok(service.list());
+  }
+
+  @RequestMapping(value = "/partenaires", method = POST, produces = APPLICATION_JSON_VALUE)
+  public Callable<ResponseEntity<Integer>> create(@RequestBody final Partenaire partenaire) {
+    return () -> ResponseEntity.ok(service.create(partenaire));
+  }
+
+  @RequestMapping(value = "/partenaires/{id}", method = DELETE, produces = APPLICATION_JSON_VALUE)
+  public Callable<ResponseEntity<Integer>> deleteById(final @PathVariable Integer id) {
+    return () -> ResponseEntity.ok(service.deleteById(id));
   }
 }

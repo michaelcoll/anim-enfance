@@ -1,16 +1,17 @@
 package fr.animenfance.service;
 
-import fr.animenfance.bean.Partenaire;
-import fr.animenfance.dao.PartenaireDao;
-import fr.animenfance.exception.PartenaireNotFoundException;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import fr.animenfance.bean.Partenaire;
+import fr.animenfance.dao.PartenaireDao;
+import fr.animenfance.exception.PartenaireNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PartenaireServiceTest {
@@ -21,13 +22,13 @@ public class PartenaireServiceTest {
   @Test
   public void testGetById() throws PartenaireNotFoundException {
     //given
-    Partenaire partenaire = new Partenaire(1L, "name");
+    Partenaire partenaire = new Partenaire(1, "name");
 
     //when
-    when(dao.getById(1L)).thenReturn(partenaire);
+    when(dao.getById(1)).thenReturn(partenaire);
 
     //then
-    assertThat(service.getById(1L)).isNotNull();
-    assertThat(service.getById(1L).getName()).isEqualTo("name");
+    assertThat(service.getById(1)).isNotNull();
+    assertThat(service.getById(1).getName()).isEqualTo("name");
   }
 }

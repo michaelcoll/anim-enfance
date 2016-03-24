@@ -10,11 +10,18 @@
   </resultMap>
 
   <select id="getById" resultMap="partenaire">
-    select * from partenaire where ptn_id = #{id}
+    SELECT * FROM partenaire WHERE ptn_id = #{id}
   </select>
 
   <select id="list" resultMap="partenaire">
-    select * from partenaire
+    SELECT * FROM partenaire
   </select>
 
+  <insert id="create" parameterType="Partenaire">
+    INSERT INTO partenaire (ptn_name) VALUES (#{partenaire.name})
+  </insert>
+
+  <delete id="deleteById">
+    DELETE FROM partenaire WHERE ptn_id = #{id}
+  </delete>
 </mapper>

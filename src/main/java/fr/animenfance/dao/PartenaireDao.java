@@ -8,7 +8,11 @@ import fr.animenfance.bean.Partenaire;
 
 public interface PartenaireDao {
 
-  Partenaire getById(@Param("id") Long id);
+  Partenaire getById(@Param("id") Integer id);
 
   List<Partenaire> list();
+
+  int create(@Param("partenaire") Partenaire partenaire);
+
+  int deleteById(@Param("id") Integer id);
 }
