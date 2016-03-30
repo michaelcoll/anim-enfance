@@ -4,19 +4,28 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>fr.animenfance</groupId>
-  <artifactId>anim-enfance-back</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <artifactId>rest-api</artifactId>
 
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.3.3.RELEASE</version>
+    <groupId>fr.animenfance</groupId>
+    <artifactId>anim-enfance-back</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
   </parent>
 
   <name>[${project.packaging}] ${project.artifactId} :: ${project.version}</name>
 
   <dependencies>
+
+    <dependency>
+      <groupId>fr.animenfance</groupId>
+      <artifactId>modele</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>fr.animenfance</groupId>
+      <artifactId>dao</artifactId>
+    </dependency>
+
     <!--Spring-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -25,44 +34,20 @@
 
     <!-- Database -->
     <dependency>
-      <groupId>org.mybatis.spring.boot</groupId>
-      <artifactId>mybatis-spring-boot-starter</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-    <dependency>
       <groupId>org.mariadb.jdbc</groupId>
       <artifactId>mariadb-java-client</artifactId>
-      <version>1.3.6</version>
-    </dependency>
-    <dependency>
-      <groupId>com.zaxxer</groupId>
-      <artifactId>HikariCP</artifactId>
-      <version>2.4.4</version>
-    </dependency>
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-      <version>4.0</version>
     </dependency>
 
     <!-- Utilities -->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>19.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.16.8</version>
     </dependency>
 
     <!-- Doc -->
     <dependency>
       <groupId>io.springfox</groupId>
       <artifactId>springfox-swagger2</artifactId>
-      <version>2.4.0</version>
     </dependency>
 
     <!--Unit test-->
@@ -73,16 +58,8 @@
     </dependency>
 
     <dependency>
-      <groupId>org.flywaydb.flyway-test-extensions</groupId>
-      <artifactId>flyway-spring-test</artifactId>
-      <version>4.0</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.3.0</version>
       <scope>test</scope>
     </dependency>
 
@@ -108,39 +85,12 @@
 
   <profiles>
     <profile>
-      <id>h2-test</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <systemPropertyVariables>
-                <flyway.driver>org.h2.Driver</flyway.driver>
-                <flyway.url>jdbc:h2:nio:${project.build.directory}/db/flywaytest.db</flyway.url>
-                <flyway.user>h2_test</flyway.user>
-                <flyway.password>h2_test</flyway.password>
-                <flyway.locations>test</flyway.locations>
-              </systemPropertyVariables>
-              <threadCount>1</threadCount>
-            </configuration>
-            <goals>
-              <goal>test</goal>
-            </goals>
-            <executions>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
       <id>dev</id>
       <dependencies>
         <!-- Doc -->
         <dependency>
           <groupId>io.springfox</groupId>
           <artifactId>springfox-swagger-ui</artifactId>
-          <version>2.4.0</version>
         </dependency>
       </dependencies>
     </profile>
@@ -178,26 +128,6 @@
                 </resource>
               </resources>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.eluder.coveralls</groupId>
-        <artifactId>coveralls-maven-plugin</artifactId>
-        <version>4.1.0</version>
-      </plugin>
-
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.7.5.201505241946</version>
-        <executions>
-          <execution>
-            <id>prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
           </execution>
         </executions>
       </plugin>
