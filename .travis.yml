@@ -6,12 +6,9 @@ node_js:
   - "stable"
 notifications:
   slack: animenfance:5XpEfsL90X6C7qGqEAJ76ZRS
-cache:
-  directories:
-    - $HOME/.m2
 script:
   - mvn package jacoco:report coveralls:report -DrepoToken=$COVERALL_TOKEN
-  - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/anim-enfance-front:latest michaelcoll/anim-enfance-front:$TRAVIS_TAG ; fi
+  - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-rest-api:latest michaelcoll/ae-rest-api:$TRAVIS_TAG ; fi
 after_success:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push michaelcoll/anim-enfance-back
+  - docker push michaelcoll/ae-rest-api
