@@ -16,7 +16,7 @@ services:
     image: "progrium/consul:latest"
     container_name: "consul1"
     hostname: "consul1"
-    command: "-server -bootstrap"
+    command: "-server -bootstrap-expect 1"
 #  consul2:
 #    image: "progrium/consul:latest"
 #    container_name: "consul2"
