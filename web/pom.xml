@@ -4,7 +4,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>rest-api</artifactId>
+  <artifactId>web</artifactId>
 
   <parent>
     <groupId>fr.animenfance</groupId>
@@ -26,10 +26,25 @@
       <artifactId>dao</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>fr.animenfance</groupId>
+      <artifactId>indexer-service</artifactId>
+    </dependency>
+
     <!--Spring-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-consul-all</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-netflix-core</artifactId>
     </dependency>
 
     <!-- Database -->
@@ -101,7 +116,6 @@
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.4.3</version>
         <executions>
           <execution>
             <id>build-image</id>

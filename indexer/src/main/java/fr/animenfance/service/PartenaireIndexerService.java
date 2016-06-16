@@ -32,11 +32,11 @@ import com.google.common.base.Stopwatch;
 import fr.animenfance.bean.Partenaire;
 import fr.animenfance.dao.PartenaireDao;
 import fr.animenfance.utils.IndexUtils;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class PartenaireIndexerService {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(PartenaireIndexerService.class);
 
   private final Analyzer analyzer;
 
@@ -55,7 +55,7 @@ public class PartenaireIndexerService {
   }
 
   public void scheduleIndexRebuild() {
-    LOGGER.debug("Index rebuild scheduled.");
+    log.debug("Index rebuild scheduled.");
     REBUILD_ORDERS.add("rebuild");
   }
 
@@ -66,7 +66,7 @@ public class PartenaireIndexerService {
 
     if(command != null) {
       Stopwatch watch = Stopwatch.createStarted();
-      LOGGER.debug("Starting rebuild index...");
+      log.debug("Starting rebuild index...");
       List<Partenaire> partenaires = dao.list();
 
       try(IndexWriter indexWriter = new IndexWriter(index, new IndexWriterConfig(analyzer))) {
@@ -78,7 +78,7 @@ public class PartenaireIndexerService {
         indexWriter.flush();
       }
 
-      LOGGER.info("Index rebuild, " + partenaires.size() + " items in " +
+      log.info("Index rebuild, " + partenaires.size() + " items in " +
         watch.toString());
     }
   }
@@ -103,7 +103,7 @@ public class PartenaireIndexerService {
     try {
       return IndexUtils.createPartenaireFromDocument(iSearcher.doc(scoreDoc.doc));
     } catch (IOException e) {
-      LOGGER.error(e.getLocalizedMessage(), e);
+      log.error(e.getLocalizedMessage(), e);
       return null;
     }
   }

@@ -27,7 +27,7 @@ public class DatasourceConfig extends HikariConfig {
   private int poolSize;
 
   @Bean(destroyMethod = "close")
-  @ConditionalOnMissingBean
+  @ConditionalOnMissingBean(type="javax.sql.DataSource")
   public HikariDataSource primaryDataSource() {
     return buildDataSource(poolSize, driverClassName, jdbcUrl, userName, password);
   }

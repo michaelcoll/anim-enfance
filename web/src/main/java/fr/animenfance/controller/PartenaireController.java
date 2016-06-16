@@ -26,6 +26,9 @@ public class PartenaireController {
   @Autowired
   private PartenaireService service;
 
+//  @Autowired
+//  private PartenaireIndexerInterface indexer;
+
   @RequestMapping(value = "/partenaires/{id}",
     method = GET,
     produces = APPLICATION_JSON_VALUE)
@@ -53,4 +56,12 @@ public class PartenaireController {
   public Callable<ResponseEntity<Integer>> deleteById(final @PathVariable Integer id) {
     return () -> ResponseEntity.ok(service.deleteById(id));
   }
+//
+//  @RequestMapping(value = "/partenaires/search",
+//    method = GET,
+//    produces = APPLICATION_JSON_VALUE)
+//  public Callable<ResponseEntity<List<Partenaire>>> searchPartenaire(
+//      @RequestParam String search, @RequestParam(defaultValue = "20") Integer hitCount) {
+//    return indexer.searchPartenaire(search, hitCount);
+//  }
 }

@@ -8,7 +8,9 @@ notifications:
   slack: animenfance:5XpEfsL90X6C7qGqEAJ76ZRS
 script:
   - mvn package jacoco:report coveralls:report -DrepoToken=$COVERALL_TOKEN
-  - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-rest-api:latest michaelcoll/ae-rest-api:$TRAVIS_TAG ; fi
+  - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-web:latest michaelcoll/ae-web:$TRAVIS_TAG ; fi
+  - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-indexer:latest michaelcoll/ae-indexer:$TRAVIS_TAG ; fi
 after_success:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push michaelcoll/ae-rest-api
+  - docker push michaelcoll/ae-web
+  - docker push michaelcoll/ae-indexer

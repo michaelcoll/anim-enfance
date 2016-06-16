@@ -25,5 +25,6 @@ spring:
     url: jdbc:mysql://db:3306/${MYSQL_DATABASE}
     username: ${MYSQL_USER}
     password: ${MYSQL_PASSWORD}
-    initialize: true
+    platform: mysql
+    initialize: false
     maximum-pool-size: 10
