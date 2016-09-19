@@ -16,29 +16,23 @@ services:
     image: "progrium/consul:latest"
     container_name: "consul1"
     hostname: "consul1"
-    command: "-server -bootstrap-expect 1"
-#  consul2:
-#    image: "progrium/consul:latest"
-#    container_name: "consul2"
-#    hostname: "consul2"
-#    expose:
-#      - 8400
-#      - 8500
-#      - 8600
-#    command: "-server -join consul1"
-#    depends_on:
-#      - consul1
-#  consul3:
-#    image: "progrium/consul:latest"
-#    container_name: "consul3"
-#    hostname: "consul3"
-#    expose:
-#      - 8400
-#      - 8500
-#      - 8600
-#    command: "-server -join consul1"
-#    depends_on:
-#      - consul1
+    ports:
+      - "8500:8500"
+    command: "-server -bootstrap-expect 3 -ui-dir /ui"
+  consul2:
+    image: "progrium/consul:latest"
+    container_name: "consul2"
+    hostname: "consul2"
+    command: "-server -join consul1"
+    depends_on:
+      - consul1
+  consul3:
+    image: "progrium/consul:latest"
+    container_name: "consul3"
+    hostname: "consul3"
+    command: "-server -join consul1"
+    depends_on:
+      - consul1
   indexer:
     image: "michaelcoll/ae-indexer"
     depends_on:
@@ -49,15 +43,17 @@ services:
       - "db:db"
     env_file:
       - "db.env"
-#  back:
-#    image: "michaelcoll/ae-web"
-#    depends_on:
-#      - db
-#      - consul1
-#      - indexer
-#    links:
-#      - "consul1:consul1"
-#      - "db:db"
-#      - "indexer:indexer"
-#    env_file:
-#      - "db.env"
+  web:
+    image: "michaelcoll/ae-web"
+    depends_on:
+      - db
+      - consul1
+      - indexer
+    links:
+      - "consul1:consul1"
+      - "db:db"
+      - "indexer:indexer"
+    ports:
+      - 8080:8080
+    env_file:
+      - "db.env"

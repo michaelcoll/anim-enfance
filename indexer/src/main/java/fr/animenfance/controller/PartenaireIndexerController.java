@@ -2,7 +2,6 @@ package fr.animenfance.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +21,23 @@ public class PartenaireIndexerController implements PartenaireIndexerInterface {
   private PartenaireIndexerService service;
 
   @Override
-  public Callable<ResponseEntity<List<Partenaire>>> searchPartenaire(final String search, final Integer hitCount) {
-    return () -> {
-      try {
-        return ResponseEntity.ok(service.searchPartenaire(search, hitCount));
-      } catch (ParseException e) {
-        log.error(e.getLocalizedMessage(), e);
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-      } catch (IOException e) {
-        log.error(e.getLocalizedMessage(), e);
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-      }
-    };
+  public ResponseEntity<List<Partenaire>> searchPartenaire(final String search, final Integer hitCount) {
+    int lHitCount;
+    if (hitCount == null) {
+      lHitCount = 20;
+    } else {
+      lHitCount = hitCount;
+    }
+
+    try {
+      return ResponseEntity.ok(service.searchPartenaire(search, lHitCount));
+    } catch (ParseException e) {
+      log.error(e.getLocalizedMessage(), e);
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    } catch (IOException e) {
+      log.error(e.getLocalizedMessage(), e);
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Override

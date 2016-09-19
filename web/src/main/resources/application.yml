@@ -8,6 +8,11 @@ spring:
     platform: mysql
     initialize: false
     maximum-pool-size: 10
+  cloud:
+    consul:
+      discovery:
+        healthCheckPath: ${management.contextPath}/health
+        healthCheckInterval: 15s
 
 server:
   port: 8080

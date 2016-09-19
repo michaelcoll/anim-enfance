@@ -1,8 +1,13 @@
 package fr.animenfance.controller;
 
-import fr.animenfance.bean.Partenaire;
-import fr.animenfance.exception.PartenaireNotFoundException;
-import fr.animenfance.service.PartenaireService;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import java.util.List;
+import java.util.concurrent.Callable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.concurrent.Callable;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import fr.animenfance.bean.Partenaire;
+import fr.animenfance.exception.PartenaireNotFoundException;
+import fr.animenfance.service.PartenaireService;
 
 @RestController
 public class PartenaireController {
@@ -62,6 +63,6 @@ public class PartenaireController {
     produces = APPLICATION_JSON_VALUE)
   public Callable<ResponseEntity<List<Partenaire>>> searchPartenaire(
     @RequestParam String search, @RequestParam(defaultValue = "20") Integer hitCount) {
-    return indexer.searchPartenaire(search, hitCount);
+    return () -> indexer.searchPartenaire(search, hitCount);
   }
 }

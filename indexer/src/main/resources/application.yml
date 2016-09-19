@@ -10,7 +10,7 @@ spring:
     maximum-pool-size: 10
 
 server:
-  port: 8081
+  port: 8080
 
 mybatis:
   mapper-locations:

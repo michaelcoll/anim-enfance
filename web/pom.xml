@@ -50,18 +50,13 @@
     </dependency>
 
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-consul-all</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-netflix-core</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-feign</artifactId>
     </dependency>
 
     <!-- Database -->
@@ -129,7 +124,9 @@
             </goals>
             <configuration>
               <imageName>${docker.image.prefix}/ae-${project.artifactId}</imageName>
-              <baseImage>java</baseImage>
+              <baseImage>java:8-jdk-alpine</baseImage>
+              <exposes>8080</exposes>
+              <squashRunCommands>true</squashRunCommands>
               <entryPoint>["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "-Dspring.profiles.active=container", "/${project.build.finalName}.jar"]
               </entryPoint>
               <!-- copy the service's jar file from target into the root directory of the image -->
