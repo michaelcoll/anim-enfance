@@ -148,7 +148,6 @@
             <configuration>
               <imageName>${docker.image.prefix}/ae-${project.artifactId}</imageName>
               <baseImage>java:8-jdk-alpine</baseImage>
-              <exposes>8080</exposes>
               <squashRunCommands>true</squashRunCommands>
               <entryPoint>["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "-Dspring.profiles.active=container", "/${project.build.finalName}.jar"]
               </entryPoint>
