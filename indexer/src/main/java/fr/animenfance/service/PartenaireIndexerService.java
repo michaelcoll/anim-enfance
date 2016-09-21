@@ -40,13 +40,16 @@ public class PartenaireIndexerService {
 
   private final Analyzer analyzer;
 
-  @Autowired private RAMDirectory index;
-  @Autowired private PartenaireDao dao;
+  private final RAMDirectory index;
+  private final PartenaireDao dao;
 
   private final static Queue<String> REBUILD_ORDERS = new ConcurrentLinkedQueue<>();
 
-  public PartenaireIndexerService() {
+  @Autowired
+  public PartenaireIndexerService(PartenaireDao dao, RAMDirectory index) {
     analyzer = new StandardAnalyzer();
+    this.dao = dao;
+    this.index = index;
   }
 
   @PostConstruct
@@ -94,7 +97,7 @@ public class PartenaireIndexerService {
       IndexSearcher iSearcher = new IndexSearcher(iReader);
       ScoreDoc[] hits = iSearcher.search(query, maxResultNumber).scoreDocs;
 
-      return Arrays.asList(hits).stream().map(scoreDoc -> getPartenaireFromSearcher(iSearcher, scoreDoc))
+      return Arrays.stream(hits).map(scoreDoc -> getPartenaireFromSearcher(iSearcher, scoreDoc))
         .collect(Collectors.toList());
     }
   }

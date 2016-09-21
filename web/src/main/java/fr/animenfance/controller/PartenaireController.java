@@ -24,11 +24,14 @@ import fr.animenfance.service.PartenaireService;
 @RestController
 public class PartenaireController {
 
-  @Autowired
-  private PartenaireService service;
+  private final PartenaireService service;
+  private final PartenaireIndexerInterface indexer;
 
   @Autowired
-  private PartenaireIndexerInterface indexer;
+  public PartenaireController(PartenaireService service, PartenaireIndexerInterface indexer) {
+    this.service = service;
+    this.indexer = indexer;
+  }
 
   @RequestMapping(value = "/partenaires/{id}",
     method = GET,

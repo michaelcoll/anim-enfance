@@ -15,15 +15,12 @@ import fr.animenfance.bean.Partenaire;
 @FeignClient("indexer")
 public interface PartenaireIndexerInterface {
 
-  @RequestMapping(value = "/partenaires/search",
-    method = GET,
-    produces = APPLICATION_JSON_VALUE)
+  @RequestMapping(value = "/partenaires/search", method = GET, produces = APPLICATION_JSON_VALUE)
   ResponseEntity<List<Partenaire>> searchPartenaire(
     @RequestParam(name = "search") final String search,
     @RequestParam(name = "hitCount") final Integer hitCount);
 
-  @RequestMapping(value = "/partenaires/rebuild-index",
-    method = GET)
+  @RequestMapping(value = "/partenaires/rebuild-index", method = GET)
   void rebuildIndex();
 
 }

@@ -17,8 +17,12 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class PartenaireIndexerController implements PartenaireIndexerInterface {
 
+  private final PartenaireIndexerService service;
+
   @Autowired
-  private PartenaireIndexerService service;
+  public PartenaireIndexerController(PartenaireIndexerService service) {
+    this.service = service;
+  }
 
   @Override
   public ResponseEntity<List<Partenaire>> searchPartenaire(final String search, final Integer hitCount) {

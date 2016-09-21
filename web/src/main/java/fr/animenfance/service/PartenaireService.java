@@ -13,8 +13,12 @@ import fr.animenfance.exception.PartenaireNotFoundException;
 @Service
 public class PartenaireService {
 
+  private final PartenaireDao dao;
+
   @Autowired
-  private PartenaireDao dao;
+  public PartenaireService(PartenaireDao dao) {
+    this.dao = dao;
+  }
 
   public Partenaire getById(Integer id) throws PartenaireNotFoundException {
     Partenaire partenaire = dao.getById(id);
