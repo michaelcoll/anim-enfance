@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class Partenaire {
   private Integer id;
   private String name;
+  private String fromHost;
 }

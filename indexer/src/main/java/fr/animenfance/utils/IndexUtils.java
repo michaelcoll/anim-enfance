@@ -1,5 +1,8 @@
 package fr.animenfance.utils;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -10,7 +13,9 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.Query;
 
 import fr.animenfance.bean.Partenaire;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public final class IndexUtils {
 
   private IndexUtils() {
@@ -34,7 +39,11 @@ public final class IndexUtils {
 
     partenaire.setName(document.getField("partenaire.name").stringValue());
     partenaire.setId(document.getField("partenaire.id").numericValue().intValue());
-
+    try {
+      partenaire.setFromHost(InetAddress.getLocalHost().getHostName());
+    } catch (UnknownHostException e) {
+      log.error(e.getLocalizedMessage(), e);
+    }
     return partenaire;
   }
 

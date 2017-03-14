@@ -22,7 +22,7 @@ public class PartenaireServiceTest {
   @Test
   public void testGetById() throws PartenaireNotFoundException {
     //given
-    Partenaire partenaire = new Partenaire(1, "name");
+    Partenaire partenaire = new Partenaire(1, "name", "host");
 
     //when
     when(dao.getById(1)).thenReturn(partenaire);

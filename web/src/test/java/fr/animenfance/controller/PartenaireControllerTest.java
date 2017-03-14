@@ -22,7 +22,7 @@ public class PartenaireControllerTest {
   @Test
   public void testGetById() throws Exception {
     //given
-    Partenaire partenaire = new Partenaire(1, "name");
+    Partenaire partenaire = new Partenaire(1, "name", "host");
 
     //when
     when(service.getById(1)).thenReturn(partenaire);
