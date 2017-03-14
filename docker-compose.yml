@@ -18,21 +18,21 @@ services:
     hostname: "consul1"
     ports:
       - "8500:8500"
-    command: "-server -bootstrap-expect 3 -ui-dir /ui"
-  consul2:
-    image: "progrium/consul:latest"
-    container_name: "consul2"
-    hostname: "consul2"
-    command: "-server -join consul1"
-    depends_on:
-      - consul1
-  consul3:
-    image: "progrium/consul:latest"
-    container_name: "consul3"
-    hostname: "consul3"
-    command: "-server -join consul1"
-    depends_on:
-      - consul1
+    command: "-server -bootstrap-expect 1 -ui-dir /ui"
+#  consul2:
+#    image: "progrium/consul:latest"
+#    container_name: "consul2"
+#    hostname: "consul2"
+#    command: "-server -join consul1"
+#    depends_on:
+#      - consul1
+#  consul3:
+#    image: "progrium/consul:latest"
+#    container_name: "consul3"
+#    hostname: "consul3"
+#    command: "-server -join consul1"
+#    depends_on:
+#      - consul1
   indexer:
     image: "michaelcoll/ae-indexer"
     depends_on:
