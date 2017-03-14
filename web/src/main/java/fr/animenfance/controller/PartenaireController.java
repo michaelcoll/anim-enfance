@@ -20,18 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.animenfance.bean.Partenaire;
 import fr.animenfance.exception.PartenaireNotFoundException;
 import fr.animenfance.service.PartenaireService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 public class PartenaireController {
 
-  private final PartenaireService service;
-  private final PartenaireIndexerInterface indexer;
+  @Autowired private PartenaireService service;
 
-  @Autowired
-  public PartenaireController(PartenaireService service, PartenaireIndexerInterface indexer) {
-    this.service = service;
-    this.indexer = indexer;
-  }
+  @SuppressWarnings("SpringJavaAutowiringInspection")
+  @Autowired private PartenaireIndexerInterface indexer;
 
   @RequestMapping(value = "/partenaires/{id}",
     method = GET,
@@ -67,5 +65,14 @@ public class PartenaireController {
   public Callable<ResponseEntity<List<Partenaire>>> searchPartenaire(
     @RequestParam String search, @RequestParam(defaultValue = "20") Integer hitCount) {
     return () -> indexer.searchPartenaire(search, hitCount);
+  }
+
+  @RequestMapping(value = "/partenaires/rebuild-index",
+    method = GET)
+  public Callable<ResponseEntity<String>> rebuildIndex() {
+    return () -> {
+      indexer.rebuildIndex();
+      return ResponseEntity.ok("Done.");
+    };
   }
 }
