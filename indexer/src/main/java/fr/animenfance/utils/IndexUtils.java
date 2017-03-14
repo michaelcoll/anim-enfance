@@ -3,7 +3,7 @@ package fr.animenfance.utils;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.IntField;
+import org.apache.lucene.document.StoredField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -23,7 +23,7 @@ public final class IndexUtils {
   public static Document createDocumentFromPartenaire(Partenaire partenaire) {
     Document doc = new Document();
 
-    doc.add(new IntField("partenaire.id", partenaire.getId(), Field.Store.YES));
+    doc.add(new StoredField("partenaire.id", partenaire.getId()));
     doc.add(new TextField("partenaire.name", partenaire.getName(), Field.Store.YES));
 
     return doc;
