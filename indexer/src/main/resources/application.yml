@@ -28,3 +28,8 @@ spring:
     platform: mysql
     initialize: false
     maximum-pool-size: 10
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/

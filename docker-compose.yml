@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 services:
   dbStorage:
     image: busybox
@@ -12,48 +12,46 @@ services:
 #    image: "michaelcoll/anim-enfance-front"
 #    ports:
 #      - "80:80"
-  consul1:
-    image: "progrium/consul:latest"
-    container_name: "consul1"
-    hostname: "consul1"
+  eureka:
+    image: "michaelcoll/ae-eureka"
     ports:
-      - "8500:8500"
-    command: "-server -bootstrap-expect 1 -ui-dir /ui"
-#  consul2:
-#    image: "progrium/consul:latest"
-#    container_name: "consul2"
-#    hostname: "consul2"
-#    command: "-server -join consul1"
-#    depends_on:
-#      - consul1
-#  consul3:
-#    image: "progrium/consul:latest"
-#    container_name: "consul3"
-#    hostname: "consul3"
-#    command: "-server -join consul1"
-#    depends_on:
-#      - consul1
+      - "8761:8761"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   indexer:
     image: "michaelcoll/ae-indexer"
     depends_on:
       - db
-      - consul1
+      - eureka
     links:
-      - "consul1:consul1"
+      - "eureka:eureka"
       - "db:db"
     env_file:
       - "db.env"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   web:
     image: "michaelcoll/ae-web"
     depends_on:
       - db
-      - consul1
+      - eureka
       - indexer
     links:
-      - "consul1:consul1"
+      - "eureka:eureka"
       - "db:db"
       - "indexer:indexer"
     ports:
       - 8080:8080
     env_file:
       - "db.env"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5

@@ -1,11 +1,3 @@
 spring:
   application:
     name: web
-
----
-spring:
-  profiles: container
-  cloud:
-    consul:
-      host: consul1
-      port: 8500

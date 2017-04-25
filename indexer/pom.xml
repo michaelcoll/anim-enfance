@@ -56,7 +56,7 @@
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-consul-all</artifactId>
+      <artifactId>spring-cloud-starter-eureka</artifactId>
     </dependency>
 
     <!-- Database -->
@@ -147,9 +147,9 @@
             </goals>
             <configuration>
               <imageName>${docker.image.prefix}/ae-${project.artifactId}</imageName>
-              <baseImage>java:8-jre-alpine</baseImage>
+              <baseImage>michaelcoll/docker-service-base</baseImage>
               <squashRunCommands>true</squashRunCommands>
-              <entryPoint>["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "-Dspring.profiles.active=container", "/${project.build.finalName}.jar"]
+              <entryPoint>["java", "-Xmx64m", "-Djava.security.egd=file:/dev/./urandom", "-jar", "-Dspring.profiles.active=container", "/${project.build.finalName}.jar"]
               </entryPoint>
               <!-- copy the service's jar file from target into the root directory of the image -->
               <resources>
