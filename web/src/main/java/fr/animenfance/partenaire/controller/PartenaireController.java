@@ -1,4 +1,4 @@
-package fr.animenfance.controller;
+package fr.animenfance.partenaire.controller;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.animenfance.bean.Partenaire;
 import fr.animenfance.exception.PartenaireNotFoundException;
-import fr.animenfance.service.PartenaireService;
+import fr.animenfance.partenaire.service.PartenaireService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -29,7 +29,7 @@ public class PartenaireController {
   @Autowired private PartenaireService service;
 
   @SuppressWarnings("SpringJavaAutowiringInspection")
-  @Autowired private PartenaireIndexerInterface indexer;
+  @Autowired private PartenaireIndexerService indexer;
 
   @RequestMapping(value = "/partenaires/{id}",
     method = GET,

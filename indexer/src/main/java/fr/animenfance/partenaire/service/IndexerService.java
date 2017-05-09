@@ -1,4 +1,4 @@
-package fr.animenfance.service;
+package fr.animenfance.partenaire.service;
 
 import static fr.animenfance.utils.IndexUtils.createDocumentFromPartenaire;
 
@@ -22,8 +22,6 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.RAMDirectory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -36,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class PartenaireIndexerService {
+public class IndexerService {
 
   private final Analyzer analyzer;
 
@@ -46,7 +44,7 @@ public class PartenaireIndexerService {
   private final static Queue<String> REBUILD_ORDERS = new ConcurrentLinkedQueue<>();
 
   @Autowired
-  public PartenaireIndexerService(PartenaireDao dao, RAMDirectory index) {
+  public IndexerService(PartenaireDao dao, RAMDirectory index) {
     analyzer = new StandardAnalyzer();
     this.dao = dao;
     this.index = index;

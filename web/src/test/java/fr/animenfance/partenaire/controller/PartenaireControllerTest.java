@@ -1,4 +1,4 @@
-package fr.animenfance.controller;
+package fr.animenfance.partenaire.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -11,7 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import fr.animenfance.bean.Partenaire;
 import fr.animenfance.exception.PartenaireNotFoundException;
-import fr.animenfance.service.PartenaireService;
+import fr.animenfance.partenaire.service.PartenaireService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PartenaireControllerTest {

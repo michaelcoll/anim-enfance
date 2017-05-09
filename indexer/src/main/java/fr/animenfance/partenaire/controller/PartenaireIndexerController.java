@@ -1,4 +1,4 @@
-package fr.animenfance.controller;
+package fr.animenfance.partenaire.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,17 +10,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.animenfance.bean.Partenaire;
-import fr.animenfance.service.PartenaireIndexerService;
+import fr.animenfance.partenaire.service.IndexerService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-public class PartenaireIndexerController implements PartenaireIndexerInterface {
+public class PartenaireIndexerController implements PartenaireIndexerService {
 
-  private final PartenaireIndexerService service;
+  private final IndexerService service;
 
   @Autowired
-  public PartenaireIndexerController(PartenaireIndexerService service) {
+  public PartenaireIndexerController(IndexerService service) {
     this.service = service;
   }
 
