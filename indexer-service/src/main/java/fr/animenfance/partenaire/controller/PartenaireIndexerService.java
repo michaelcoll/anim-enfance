@@ -1,23 +1,27 @@
 package fr.animenfance.partenaire.controller;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.animenfance.bean.Partenaire;
 
 public interface PartenaireIndexerService {
 
-  @GetMapping(value = "/partenaires/search", produces = APPLICATION_JSON_VALUE)
+  @RequestMapping(value = "/partenaires/search",
+    method = GET,
+    produces = APPLICATION_JSON_VALUE)
   ResponseEntity<List<Partenaire>> searchPartenaire(
     @RequestParam(name = "search") final String search,
     @RequestParam(name = "hitCount") final Integer hitCount);
 
-  @GetMapping(value = "/partenaires/rebuild-index")
+  @RequestMapping(value = "/partenaires/rebuild-index",
+    method = GET)
   void rebuildIndex();
 
 }
