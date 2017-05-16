@@ -36,18 +36,17 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class IndexerService {
 
-  private final Analyzer analyzer;
-
-  private final RAMDirectory index;
-  private final PartenaireDao dao;
-
   private final static Queue<String> REBUILD_ORDERS = new ConcurrentLinkedQueue<>();
 
+  private final Analyzer analyzer;
+  private final PartenaireDao dao;
+
+  private RAMDirectory index = new RAMDirectory();
+
   @Autowired
-  public IndexerService(PartenaireDao dao, RAMDirectory index) {
+  public IndexerService(PartenaireDao dao) {
     analyzer = new StandardAnalyzer();
     this.dao = dao;
-    this.index = index;
   }
 
   @PostConstruct
@@ -68,6 +67,9 @@ public class IndexerService {
     if(command != null) {
       Stopwatch watch = Stopwatch.createStarted();
       log.debug("Starting rebuild index...");
+
+      clearIndex();
+
       List<Partenaire> partenaires = dao.list();
 
       try(IndexWriter indexWriter = new IndexWriter(index, new IndexWriterConfig(analyzer))) {
@@ -82,6 +84,11 @@ public class IndexerService {
       log.info("Index rebuild, " + partenaires.size() + " items in " +
         watch.toString());
     }
+  }
+
+  private void clearIndex() {
+    index.close();
+    index = new RAMDirectory();
   }
 
   public long getIndexSize() {
