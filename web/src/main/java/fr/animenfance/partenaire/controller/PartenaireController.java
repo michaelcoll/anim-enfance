@@ -1,9 +1,6 @@
 package fr.animenfance.partenaire.controller;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -11,9 +8,11 @@ import java.util.concurrent.Callable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,8 +30,7 @@ public class PartenaireController {
   @SuppressWarnings("SpringJavaAutowiringInspection")
   @Autowired private PartenaireIndexerService indexer;
 
-  @RequestMapping(value = "/partenaires/{id}",
-    method = GET,
+  @GetMapping(value = "/partenaires/{id}",
     produces = APPLICATION_JSON_VALUE)
   public Callable<ResponseEntity<Partenaire>> getById(final @PathVariable Integer id) {
     return () -> {
@@ -44,31 +42,29 @@ public class PartenaireController {
     };
   }
 
-  @RequestMapping(value = "/partenaires", method = GET, produces = APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/partenaires", produces = APPLICATION_JSON_VALUE)
   public Callable<ResponseEntity<List<Partenaire>>> list() {
     return () -> ResponseEntity.ok(service.list());
   }
 
-  @RequestMapping(value = "/partenaires", method = POST, produces = APPLICATION_JSON_VALUE)
+  @PostMapping(value = "/partenaires", produces = APPLICATION_JSON_VALUE)
   public Callable<ResponseEntity<Integer>> create(@RequestBody final Partenaire partenaire) {
     return () -> ResponseEntity.ok(service.create(partenaire));
   }
 
-  @RequestMapping(value = "/partenaires/{id}", method = DELETE, produces = APPLICATION_JSON_VALUE)
+  @DeleteMapping(value = "/partenaires/{id}", produces = APPLICATION_JSON_VALUE)
   public Callable<ResponseEntity<Integer>> deleteById(final @PathVariable Integer id) {
     return () -> ResponseEntity.ok(service.deleteById(id));
   }
 
-  @RequestMapping(value = "/partenaires/search",
-    method = GET,
+  @GetMapping(value = "/partenaires/search",
     produces = APPLICATION_JSON_VALUE)
   public Callable<ResponseEntity<List<Partenaire>>> searchPartenaire(
     @RequestParam String search, @RequestParam(defaultValue = "20") Integer hitCount) {
     return () -> indexer.searchPartenaire(search, hitCount);
   }
 
-  @RequestMapping(value = "/partenaires/rebuild-index",
-    method = GET)
+  @GetMapping(value = "/partenaires/rebuild-index")
   public Callable<ResponseEntity<String>> rebuildIndex() {
     return () -> {
       indexer.rebuildIndex();
