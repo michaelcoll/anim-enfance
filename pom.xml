@@ -12,10 +12,11 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.3.5.RELEASE</version>
+    <version>2.0.2.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-  <name>[${project.packaging}] ${project.artifactId} :: ${project.version}</name>
+  <name>${project.artifactId}</name>
 
   <properties>
     <!--General-->
@@ -28,9 +29,9 @@
     <mybatis-spring-boot-starter>1.1.1</mybatis-spring-boot-starter>
     <HikariCP.version>2.4.6</HikariCP.version>
     <flyway.verion>4.0.2</flyway.verion>
-    <flyway-spring-test.verion>4.0.1</flyway-spring-test.verion>
+    <flyway-spring5-test.verion>5.0.0</flyway-spring5-test.verion>
     <assertj.version>3.3.0</assertj.version>
-    <mariadb-java-client.version>1.3.6</mariadb-java-client.version>
+    <mariadb-java-client.version>2.2.4</mariadb-java-client.version>
     <sprinfox-swagger.version>2.5.0</sprinfox-swagger.version>
     <lucene.version>5.5.0</lucene.version>
     <spring-cloud-netflix.version>1.1.2.RELEASE</spring-cloud-netflix.version>
@@ -39,10 +40,7 @@
 
   <modules>
     <module>modele</module>
-    <module>dao</module>
-    <module>web</module>
-    <module>indexer-service</module>
-    <module>indexer</module>
+    <module>services</module>
   </modules>
 
   <dependencyManagement>
@@ -54,38 +52,11 @@
         <version>${project.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>fr.animenfance</groupId>
-        <artifactId>dao</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>fr.animenfance</groupId>
-        <artifactId>indexer-service</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <!-- Spring cloud -->
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-consul-dependencies</artifactId>
-        <version>${spring-cloud-consul-dependencies.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
-
       <!-- Utilities -->
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>${guava.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>${lombok.version}</version>
       </dependency>
 
       <!-- Database -->
@@ -102,12 +73,6 @@
       </dependency>
 
       <dependency>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-core</artifactId>
-        <version>${flyway.verion}</version>
-      </dependency>
-
-      <dependency>
         <groupId>org.mariadb.jdbc</groupId>
         <artifactId>mariadb-java-client</artifactId>
         <version>${mariadb-java-client.version}</version>
@@ -116,8 +81,8 @@
       <!--Unit test-->
       <dependency>
         <groupId>org.flywaydb.flyway-test-extensions</groupId>
-        <artifactId>flyway-spring-test</artifactId>
-        <version>${flyway-spring-test.verion}</version>
+        <artifactId>flyway-spring5-test</artifactId>
+        <version>${flyway-spring5-test.verion}</version>
         <scope>test</scope>
       </dependency>
 
