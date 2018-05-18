@@ -18,7 +18,7 @@
   </select>
 
   <insert id="create" parameterType="fr.animenfance.bean.partenaire.Partenaire">
-    INSERT INTO partenaire (ptn_name) VALUES (#{partenaire.name})
+    INSERT INTO partenaire (ptn_name) VALUES (#{item.name})
   </insert>
 
   <delete id="deleteById">

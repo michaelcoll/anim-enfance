@@ -1,16 +1,15 @@
-package fr.animenfance.partenaire.config;
+package fr.animenfance.common.config;
 
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.test.FlywayHelperFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static fr.animenfance.partenaire.config.DatasourceConfig.buildDataSource;
+import static fr.animenfance.common.config.DatasourceConfiguration.buildDataSource;
 
 @Configuration
 public class TestConfiguration {
@@ -43,13 +42,5 @@ public class TestConfiguration {
     SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
     factoryBean.setDataSource(dataSource);
     return factoryBean;
-  }
-
-  @Bean
-  public MapperScannerConfigurer mapperScannerConfigurer() {
-    MapperScannerConfigurer configurer = new MapperScannerConfigurer();
-    configurer.setBasePackage("fr.animenfance.partenaire.dao");
-    configurer.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
-    return configurer;
   }
 }

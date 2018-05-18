@@ -4,7 +4,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>partenaire-service</artifactId>
+  <artifactId>creche-service</artifactId>
 
   <parent>
     <groupId>fr.animenfance</groupId>
@@ -27,6 +27,7 @@
       <artifactId>common-service</artifactId>
     </dependency>
 
+    <!--Unit test-->
     <dependency>
       <groupId>fr.animenfance</groupId>
       <artifactId>common-service-test</artifactId>

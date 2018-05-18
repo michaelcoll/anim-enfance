@@ -1,14 +1,19 @@
 package fr.animenfance.partenaire.dao;
 
 import fr.animenfance.bean.partenaire.Partenaire;
+import fr.animenfance.common.dao.AbstractDaoTest;
+import fr.animenfance.partenaire.config.TestPartenaireConfiguration;
 import org.flywaydb.test.annotation.FlywayTest;
 import org.junit.Test;
+import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ContextConfiguration(classes = {TestPartenaireConfiguration.class})
 @FlywayTest(locationsForMigrate = {"sql"})
 public class PartenaireDaoTest extends AbstractDaoTest {
 

@@ -1,19 +1,10 @@
 package fr.animenfance.partenaire.dao;
 
 import fr.animenfance.bean.partenaire.Partenaire;
+import fr.animenfance.common.dao.CRUDDao;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 @Mapper
-public interface PartenaireDao {
+public interface PartenaireDao extends CRUDDao<Partenaire, Integer> {
 
-  Partenaire getById(@Param("id") Integer id);
-
-  List<Partenaire> list();
-
-  int create(@Param("partenaire") Partenaire partenaire);
-
-  int deleteById(@Param("id") Integer id);
 }

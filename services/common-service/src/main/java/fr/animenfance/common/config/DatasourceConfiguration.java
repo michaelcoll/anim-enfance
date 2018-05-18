@@ -1,17 +1,14 @@
-package fr.animenfance.partenaire.config;
+package fr.animenfance.common.config;
 
-import org.mybatis.spring.annotation.MapperScan;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
-@MapperScan("fr.animenfance.partenaire.dao")
 @Configuration
-public class DatasourceConfig extends HikariConfig {
+public class DatasourceConfiguration extends HikariConfig {
 
   @Value("${spring.datasource.hikari.driverclassname}")
   private String driverClassName;
@@ -34,7 +31,7 @@ public class DatasourceConfig extends HikariConfig {
     return buildDataSource(poolSize, driverClassName, jdbcUrl, userName, password);
   }
 
-  static HikariDataSource buildDataSource(
+  public static HikariDataSource buildDataSource(
     int poolSize, String driverClassName, String jdbcUrl, String userName, String password) {
     final HikariDataSource ds = new HikariDataSource();
     ds.setMaximumPoolSize(poolSize);

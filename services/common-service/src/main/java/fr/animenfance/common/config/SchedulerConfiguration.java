@@ -1,4 +1,4 @@
-package fr.animenfance.partenaire.config;
+package fr.animenfance.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

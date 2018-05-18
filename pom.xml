@@ -24,18 +24,11 @@
     <docker.image.prefix>michaelcoll</docker.image.prefix>
 
     <!--Dependency versions-->
-    <guava.version>19.0</guava.version>
-    <lombok.version>1.16.8</lombok.version>
+    <guava.version>25.0-jre</guava.version>
     <mybatis-spring-boot-starter>1.1.1</mybatis-spring-boot-starter>
-    <HikariCP.version>2.4.6</HikariCP.version>
-    <flyway.verion>4.0.2</flyway.verion>
     <flyway-spring5-test.verion>5.0.0</flyway-spring5-test.verion>
-    <assertj.version>3.3.0</assertj.version>
+    <assertj.version>3.10.0</assertj.version>
     <mariadb-java-client.version>2.2.4</mariadb-java-client.version>
-    <sprinfox-swagger.version>2.5.0</sprinfox-swagger.version>
-    <lucene.version>5.5.0</lucene.version>
-    <spring-cloud-netflix.version>1.1.2.RELEASE</spring-cloud-netflix.version>
-    <spring-cloud-consul-dependencies.version>1.0.1.RELEASE</spring-cloud-consul-dependencies.version>
   </properties>
 
   <modules>
@@ -50,6 +43,19 @@
         <groupId>fr.animenfance</groupId>
         <artifactId>modele</artifactId>
         <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>fr.animenfance</groupId>
+        <artifactId>common-service</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>fr.animenfance</groupId>
+        <artifactId>common-service-test</artifactId>
+        <version>${project.version}</version>
+        <scope>test</scope>
       </dependency>
 
       <!-- Utilities -->
@@ -67,12 +73,6 @@
       </dependency>
 
       <dependency>
-        <groupId>com.zaxxer</groupId>
-        <artifactId>HikariCP</artifactId>
-        <version>${HikariCP.version}</version>
-      </dependency>
-
-      <dependency>
         <groupId>org.mariadb.jdbc</groupId>
         <artifactId>mariadb-java-client</artifactId>
         <version>${mariadb-java-client.version}</version>
@@ -83,7 +83,6 @@
         <groupId>org.flywaydb.flyway-test-extensions</groupId>
         <artifactId>flyway-spring5-test</artifactId>
         <version>${flyway-spring5-test.verion}</version>
-        <scope>test</scope>
       </dependency>
 
       <dependency>
@@ -92,92 +91,8 @@
         <version>${assertj.version}</version>
       </dependency>
 
-      <!-- Indexing -->
-      <dependency>
-        <groupId>org.apache.lucene</groupId>
-        <artifactId>lucene-core</artifactId>
-        <version>${lucene.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.lucene</groupId>
-        <artifactId>lucene-analyzers-common</artifactId>
-        <version>${lucene.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.lucene</groupId>
-        <artifactId>lucene-queryparser</artifactId>
-        <version>${lucene.version}</version>
-      </dependency>
-
-      <!-- Doc -->
-      <dependency>
-        <groupId>io.springfox</groupId>
-        <artifactId>springfox-swagger2</artifactId>
-        <version>${sprinfox-swagger.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.springfox</groupId>
-        <artifactId>springfox-swagger-ui</artifactId>
-        <version>${sprinfox-swagger.version}</version>
-      </dependency>
-
     </dependencies>
   </dependencyManagement>
-
-  <repositories>
-    <repository>
-      <id>spring-snapshots</id>
-      <name>Spring Snapshots</name>
-      <url>http://repo.spring.io/libs-snapshot-local</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>spring-milestones</id>
-      <name>Spring Milestones</name>
-      <url>http://repo.spring.io/libs-milestone-local</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>spring-releases</id>
-      <name>Spring Releases</name>
-      <url>https://repo.spring.io/libs-release</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>spring-snapshots</id>
-      <name>Spring Snapshots</name>
-      <url>http://repo.spring.io/libs-snapshot-local</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>spring-milestones</id>
-      <name>Spring Milestones</name>
-      <url>http://repo.spring.io/libs-milestone-local</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>spring-releases</id>
-      <url>https://repo.spring.io/libs-release</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
 
   <build>
     <pluginManagement>
@@ -185,7 +100,7 @@
         <plugin>
           <groupId>com.spotify</groupId>
           <artifactId>docker-maven-plugin</artifactId>
-          <version>0.4.10</version>
+          <version>1.0.0</version>
         </plugin>
       </plugins>
     </pluginManagement>

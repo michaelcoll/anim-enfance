@@ -16,6 +16,9 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>common-service</module>
+    <module>common-service-test</module>
+    <module>creche-service</module>
     <module>partenaire-service</module>
   </modules>
 
