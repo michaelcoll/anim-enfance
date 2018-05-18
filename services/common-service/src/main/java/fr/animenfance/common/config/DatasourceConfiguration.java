@@ -33,12 +33,12 @@ public class DatasourceConfiguration extends HikariConfig {
 
   static HikariDataSource buildDataSource(
     int poolSize, String driverClassName, String jdbcUrl, String userName, String password) {
-    final HikariDataSource ds = new HikariDataSource();
-    ds.setMaximumPoolSize(poolSize);
-    ds.setDriverClassName(driverClassName);
-    ds.setJdbcUrl(jdbcUrl);
-    ds.setUsername(userName);
-    ds.setPassword(password);
-    return ds;
+    HikariConfig config = new HikariConfig();
+    config.setMaximumPoolSize(poolSize);
+    config.setDriverClassName(driverClassName);
+    config.setJdbcUrl(jdbcUrl);
+    config.setUsername(userName);
+    config.setPassword(password);
+    return new HikariDataSource(config);
   }
 }
