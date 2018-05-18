@@ -1,0 +1,19 @@
+
+spring:
+  datasource:
+    hikari:
+      driverclassname: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://localhost:3306/local
+      username: root
+      password: root
+      maximum-pool-size: 10
+
+---
+spring:
+  profiles: container
+  datasource:
+    driverclassname: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://db:3306/${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    platform: mysql
