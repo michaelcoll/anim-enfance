@@ -17,6 +17,12 @@
 
   <dependencies>
 
+    <!-- Spring -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
     <!-- Database -->
     <dependency>
       <groupId>org.mariadb.jdbc</groupId>
