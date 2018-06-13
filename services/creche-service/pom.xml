@@ -50,30 +50,13 @@
 
       <plugin>
         <groupId>com.spotify</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>build-image</id>
-            <phase>package</phase>
-            <goals>
-              <goal>build</goal>
-            </goals>
-            <configuration>
-              <imageName>${docker.image.prefix}/ae-${project.artifactId}</imageName>
-              <baseImage>java</baseImage>
-              <entryPoint>["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "-Dspring.profiles.active=container", "/${project.build.finalName}.jar"]
-              </entryPoint>
-              <!-- copy the service's jar file from target into the root directory of the image -->
-              <resources>
-                <resource>
-                  <targetPath>/</targetPath>
-                  <directory>${project.build.directory}</directory>
-                  <include>${project.build.finalName}.jar</include>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <configuration>
+          <repository>${docker.image.prefix}/ae-${project.artifactId}</repository>
+          <buildArgs>
+            <JAR_FILE>${project.build.directory}/${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+        </configuration>
       </plugin>
     </plugins>
   </build>
