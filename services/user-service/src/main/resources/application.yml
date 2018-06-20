@@ -7,6 +7,11 @@ spring:
       username: root
       password: root
       maximum-pool-size: 10
+  flyway:
+    schemas: USER
+
+server:
+  port: 8083
 
 ---
 spring:

@@ -10,18 +10,18 @@
   </resultMap>
 
   <select id="getById" resultMap="partenaire">
-    SELECT * FROM partenaire WHERE ptn_id = #{id}
+    SELECT * FROM PARTENAIRE.partenaire WHERE ptn_id = #{id}
   </select>
 
   <select id="list" resultMap="partenaire">
-    SELECT * FROM partenaire
+    SELECT * FROM PARTENAIRE.partenaire
   </select>
 
   <insert id="create" parameterType="fr.animenfance.bean.partenaire.Partenaire">
-    INSERT INTO partenaire (ptn_name) VALUES (#{item.name})
+    INSERT INTO PARTENAIRE.partenaire (ptn_name) VALUES (#{item.name})
   </insert>
 
   <delete id="deleteById">
-    DELETE FROM partenaire WHERE ptn_id = #{id}
+    DELETE FROM PARTENAIRE.partenaire WHERE ptn_id = #{id}
   </delete>
 </mapper>

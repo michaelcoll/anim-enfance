@@ -10,18 +10,18 @@
   </resultMap>
 
   <select id="getById" resultMap="user">
-    SELECT * FROM `user` WHERE usr_id = #{id}
+    SELECT * FROM USER.`user` WHERE usr_id = #{id}
   </select>
 
   <select id="list" resultMap="user">
-    SELECT * FROM `user`
+    SELECT * FROM USER.`user`
   </select>
 
   <insert id="create" parameterType="fr.animenfance.bean.creche.Creche">
-    INSERT INTO `user` (usr_name) VALUES (#{item.name})
+    INSERT INTO USER.`user` (usr_name) VALUES (#{item.name})
   </insert>
 
   <delete id="deleteById">
-    DELETE FROM `user` WHERE usr_id = #{id}
+    DELETE FROM USER.`user` WHERE usr_id = #{id}
   </delete>
 </mapper>

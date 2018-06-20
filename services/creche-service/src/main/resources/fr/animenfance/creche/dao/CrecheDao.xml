@@ -10,18 +10,18 @@
   </resultMap>
 
   <select id="getById" resultMap="creche">
-    SELECT * FROM creche WHERE cre_id = #{id}
+    SELECT * FROM CRECHE.creche WHERE cre_id = #{id}
   </select>
 
   <select id="list" resultMap="creche">
-    SELECT * FROM creche
+    SELECT * FROM CRECHE.creche
   </select>
 
   <insert id="create" parameterType="fr.animenfance.bean.creche.Creche">
-    INSERT INTO creche (cre_name) VALUES (#{item.name})
+    INSERT INTO CRECHE.creche (cre_name) VALUES (#{item.name})
   </insert>
 
   <delete id="deleteById">
-    DELETE FROM creche WHERE cre_id = #{id}
+    DELETE FROM CRECHE.creche WHERE cre_id = #{id}
   </delete>
 </mapper>
