@@ -25,3 +25,6 @@ spring:
     platform: mysql
     hikari:
       maximum-pool-size: 10
+
+server:
+  port: 8080
