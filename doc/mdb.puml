@@ -1,0 +1,57 @@
+@startuml
+
+package user <<Frame>> {
+  class user {
+    {static} #id int
+    username varchar
+    password varchar
+  }
+}
+
+package structure <<Frame>> {
+  class structure_role {
+    {static} #id int
+    name varchar
+  }
+
+  class person {
+    {static} #id int
+    name varchar
+  }
+
+  structure "1 " -- "  0..*" structure_role
+  structure_role "  *" -- "1 " person
+
+  class structure {
+    {static} #id int
+    name varchar
+  }
+}
+
+package partner <<Frame>> {
+  class partner {
+    {static} #id int
+    name varchar
+    description varchar
+  }
+
+  class show {
+    {static} #id int
+    name varchar
+
+  }
+
+  class show_date {
+    {static} #id int
+    week_of_day int
+    date date
+  }
+
+  show "1 " -- "  0..*" show_date
+  partner "1 " -- "  1..*" show
+
+}
+
+structure "1 " -- "  0..*" show_date
+
+@enduml
