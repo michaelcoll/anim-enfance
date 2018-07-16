@@ -18,8 +18,8 @@
   <modules>
     <module>common-service</module>
     <module>common-service-test</module>
-    <module>creche-service</module>
-    <module>partenaire-service</module>
+    <module>structure-service</module>
+    <module>partner-service</module>
     <module>user-service</module>
   </modules>
 

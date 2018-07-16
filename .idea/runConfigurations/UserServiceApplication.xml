@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="user-service" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="fr.animenfance.user.UserServiceApplication" />
+    <option name="VM_PARAMETERS" value="-Xmx32m -Xss256k" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method />
+  </configuration>
+</component>

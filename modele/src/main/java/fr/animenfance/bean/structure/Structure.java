@@ -1,4 +1,4 @@
-package fr.animenfance.bean.user;
+package fr.animenfance.bean.structure;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Structure {
 
   @Id
   private String id;

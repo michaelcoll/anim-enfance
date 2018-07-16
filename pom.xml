@@ -12,8 +12,8 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.0.2.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <version>2.0.3.RELEASE</version>
+    <relativePath/>
   </parent>
 
   <name>${project.artifactId}</name>
@@ -24,11 +24,8 @@
     <docker.image.prefix>michaelcoll</docker.image.prefix>
 
     <!--Dependency versions-->
-    <guava.version>25.0-jre</guava.version>
-    <mybatis-spring-boot-starter>1.1.1</mybatis-spring-boot-starter>
-    <flyway-spring5-test.verion>5.0.0</flyway-spring5-test.verion>
+    <guava.version>25.1-jre</guava.version>
     <assertj.version>3.10.0</assertj.version>
-    <mariadb-java-client.version>2.2.4</mariadb-java-client.version>
   </properties>
 
   <modules>
@@ -65,26 +62,7 @@
         <version>${guava.version}</version>
       </dependency>
 
-      <!-- Database -->
-      <dependency>
-        <groupId>org.mybatis.spring.boot</groupId>
-        <artifactId>mybatis-spring-boot-starter</artifactId>
-        <version>${mybatis-spring-boot-starter}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.mariadb.jdbc</groupId>
-        <artifactId>mariadb-java-client</artifactId>
-        <version>${mariadb-java-client.version}</version>
-      </dependency>
-
       <!--Unit test-->
-      <dependency>
-        <groupId>org.flywaydb.flyway-test-extensions</groupId>
-        <artifactId>flyway-spring5-test</artifactId>
-        <version>${flyway-spring5-test.verion}</version>
-      </dependency>
-
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
