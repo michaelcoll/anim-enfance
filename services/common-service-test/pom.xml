@@ -33,16 +33,6 @@
       <artifactId>reactor-test</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.flywaydb.flyway-test-extensions</groupId>
-      <artifactId>flyway-spring5-test</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-    </dependency>
-
   </dependencies>
 
 </project>

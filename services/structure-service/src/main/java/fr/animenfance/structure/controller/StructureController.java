@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/structure")
 public class StructureController {
@@ -22,7 +21,7 @@ public class StructureController {
   }
 
   @GetMapping("/{id}")
-  public Mono<Structure> getById(final @PathVariable Integer id) {
+  public Mono<Structure> getById(final @PathVariable String id) {
     return repository.findById(id)
       .switchIfEmpty(Mono.error(new StructureNotFoundException()));
   }
@@ -38,7 +37,7 @@ public class StructureController {
   }
 
   @DeleteMapping("/{id}")
-  public Mono<Void> deleteById(final @PathVariable Integer id) {
+  public Mono<Void> deleteById(final @PathVariable String id) {
     return repository.deleteById(id);
   }
 

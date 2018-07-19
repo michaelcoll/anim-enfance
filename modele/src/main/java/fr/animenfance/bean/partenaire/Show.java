@@ -3,23 +3,19 @@ package fr.animenfance.bean.partenaire;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-@Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Partner {
-
-  @Id
-  private String id;
+public class Show {
 
   @NotBlank
   private String name;
+  private String description;
+  private Integer duration;
+  private List<ShowDate> dates;
 
-  private List<Show> shows;
 }

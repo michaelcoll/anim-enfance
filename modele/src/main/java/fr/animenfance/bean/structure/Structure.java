@@ -15,4 +15,5 @@ public class Structure {
   @Id
   private String id;
   private String name;
+  private String imageSrc;
 }

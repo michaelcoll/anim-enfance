@@ -4,22 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
-import java.util.List;
+import java.time.DayOfWeek;
+import java.util.Date;
 
-@Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Partner {
+public class ShowDate {
 
   @Id
   private String id;
+  private DayOfWeek weekOfDay;
+  private Date date;
 
-  @NotBlank
-  private String name;
-
-  private List<Show> shows;
 }

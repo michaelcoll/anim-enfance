@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@CrossOrigin("*")
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+
 @RestController
 @RequestMapping("/partner")
 public class PartenaireController {
@@ -38,6 +39,7 @@ public class PartenaireController {
   }
 
   @DeleteMapping("/{id}")
+  @ResponseStatus(NO_CONTENT)
   public Mono<Void> deleteById(final @PathVariable String id) {
     return repository.deleteById(id);
   }

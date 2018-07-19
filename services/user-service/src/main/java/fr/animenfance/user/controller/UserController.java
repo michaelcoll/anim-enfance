@@ -2,16 +2,15 @@ package fr.animenfance.user.controller;
 
 import fr.animenfance.bean.user.User;
 import fr.animenfance.user.exception.UserNotFoundException;
-import fr.animenfance.user.repository.UserRepository;
+import fr.animenfance.common.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@CrossOrigin("*")
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
   private final UserRepository repository;
@@ -21,9 +20,9 @@ public class UserController {
     this.repository = repository;
   }
 
-  @GetMapping("/{id}")
-  public Mono<User> getById(final @PathVariable Integer id) {
-    return repository.findById(id)
+  @GetMapping("/{username}")
+  public Mono<User> findByUsername(@PathVariable() String username) {
+    return repository.findByUsername(username)
       .switchIfEmpty(Mono.error(new UserNotFoundException()));
   }
 

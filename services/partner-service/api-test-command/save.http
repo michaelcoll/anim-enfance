@@ -1,4 +1,4 @@
-PUT http://localhost:8082/partner
+PUT http://localhost:8081/partner
 Content-Type: application/json
 
 {
