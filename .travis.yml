@@ -1,16 +1,40 @@
-language: java
-sudo: required
-services:
-  - docker
-node_js:
-  - "stable"
+matrix:
+  include:
+   - language: java
+     sudo: required
+     services:
+       - docker
+     node_js:
+       - "stable"
+     before_script:
+       - cd back
+     script:
+       - mvn package jacoco:report coveralls:report -DrepoToken=$COVERALL_TOKEN
+       - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-partner-service:latest michaelcoll/ae-partner-service:$TRAVIS_TAG ; fi
+       - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-structure-service:latest michaelcoll/ae-structure-service:$TRAVIS_TAG ; fi
+       - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-user-service:latest michaelcoll/ae-user-service:$TRAVIS_TAG ; fi
+     after_success:
+       - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+       - docker push michaelcoll/ae-partner-service
+       - docker push michaelcoll/ae-structure-service
+       - docker push michaelcoll/ae-user-service
+   - language: node_js
+     cache:
+       yarn: true
+       directories:
+         - "node_modules"
+     sudo: required
+     services:
+       - docker
+     node_js:
+       - "stable"
+     before_script:
+       - cd font
+     script:
+       - yarn build
+     after_success:
+#       - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+#       - docker push michaelcoll/ae-web
+#       - docker push michaelcoll/ae-indexer
 notifications:
   slack: animenfance:5XpEfsL90X6C7qGqEAJ76ZRS
-script:
-  - mvn package jacoco:report coveralls:report -DrepoToken=$COVERALL_TOKEN
-  - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-web:latest michaelcoll/ae-web:$TRAVIS_TAG ; fi
-  - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-indexer:latest michaelcoll/ae-indexer:$TRAVIS_TAG ; fi
-after_success:
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push michaelcoll/ae-web
-  - docker push michaelcoll/ae-indexer
