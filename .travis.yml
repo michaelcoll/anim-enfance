@@ -29,7 +29,7 @@ matrix:
      node_js:
        - "stable"
      before_script:
-       - cd font
+       - cd ../font
      script:
        - yarn build
      after_success:
