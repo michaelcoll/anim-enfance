@@ -22,7 +22,7 @@ public class PartenaireDaoTest extends AbstractDaoTest {
 
   @Test
   public void test_create() {
-    int insertCount = dao.create(new Partenaire(42, "test4"));
+    int insertCount = dao.create(new Partenaire(42, "test4", "test"));
 
     assertThat(insertCount).isEqualTo(1);
   }
