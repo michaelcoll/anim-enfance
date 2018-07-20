@@ -2,7 +2,7 @@ matrix:
   include:
    - language: java
      jdk:
-       - openjdk9
+       - openjdk8
      sudo: required
      services:
        - docker
