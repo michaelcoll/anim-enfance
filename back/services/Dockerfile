@@ -8,4 +8,6 @@ COPY ${JAR_FILE} app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Xmx32m", "-Xss256k", "-Dspring.profiles.active=${SPRING_PROFILE}", "-jar", "app.jar"]
+ENTRYPOINT []
+
+CMD java -Xmx32m -Xss256k -Dspring.profiles.active=${SPRING_PROFILE} -jar app.jar
