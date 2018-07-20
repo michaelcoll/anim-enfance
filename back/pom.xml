@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>fr.animenfance</groupId>
+  <artifactId>anim-enfance-back</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.3.RELEASE</version>
+    <relativePath/>
+  </parent>
+
+  <name>${project.artifactId}</name>
+
+  <properties>
+    <!--General-->
+    <java.version>1.8</java.version>
+    <docker.image.prefix>michaelcoll</docker.image.prefix>
+
+    <!--Dependency versions-->
+    <guava.version>25.1-jre</guava.version>
+    <assertj.version>3.10.0</assertj.version>
+  </properties>
+
+  <modules>
+    <module>modele</module>
+    <module>services</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Project -->
+      <dependency>
+        <groupId>fr.animenfance</groupId>
+        <artifactId>modele</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>fr.animenfance</groupId>
+        <artifactId>common-service</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>fr.animenfance</groupId>
+        <artifactId>common-service-test</artifactId>
+        <version>${project.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- Utilities -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
+      <!--Unit test-->
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>${assertj.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.spotify</groupId>
+          <artifactId>dockerfile-maven-plugin</artifactId>
+          <version>1.4.3</version>
+          <dependencies>
+            <dependency>
+              <groupId>javax.activation</groupId>
+              <artifactId>activation</artifactId>
+              <version>1.1.1</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <id>default</id>
+              <goals>
+                <goal>build</goal>
+                <goal>push</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <repository>${docker.image.prefix}/ae-${project.artifactId}</repository>
+            <tag>${project.version}</tag>
+            <buildArgs>
+              <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+              <SPRING_PROFILE>container</SPRING_PROFILE>
+            </buildArgs>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.eluder.coveralls</groupId>
+        <artifactId>coveralls-maven-plugin</artifactId>
+        <version>4.1.0</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.7.5.201505241946</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

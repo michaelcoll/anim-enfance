@@ -1,0 +1,4 @@
+GET http://localhost:8081/partner
+X-AUTH-TOKEN: 6c9c38ae-a6e4-4d4d-bbec-ed986ab9d758
+
+###

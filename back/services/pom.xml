@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>services</artifactId>
+
+  <parent>
+    <groupId>fr.animenfance</groupId>
+    <artifactId>anim-enfance-back</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <name>${project.artifactId}</name>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>common-service</module>
+    <module>common-service-test</module>
+    <module>structure-service</module>
+    <module>partner-service</module>
+    <module>user-service</module>
+  </modules>
+
+</project>
