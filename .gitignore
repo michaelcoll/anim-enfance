@@ -9,6 +9,7 @@ node_modules
 ### Build dirs
 target
 /dist
+.gradle
 
 ### local env files
 .env.local

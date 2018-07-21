@@ -1,0 +1,31 @@
+buildscript {
+  ext {
+    springBootVersion = '2.0.3.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.20.1"
+  }
+}
+
+allprojects {
+
+  apply plugin: 'maven'
+
+  group = 'fr.animenfance'
+  version = '1.0.0-SNAPSHOT'
+}
+
+subprojects {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+  }
+}

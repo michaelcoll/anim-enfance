@@ -1,0 +1,17 @@
+description = 'user-service'
+
+docker {
+  dependsOn build
+  name "michaelcoll/${bootJar.baseName}"
+  tags "${bootJar.version}"
+  files bootJar.archivePath
+  buildArgs(['JAR_FILE': "${bootJar.archiveName}", 'SPRING_PROFILE': 'container'])
+}
+
+dependencies {
+  compile project(':back:modele')
+  compile project(':back:common:common-service')
+
+  testCompile project(':back:common:common-service-test')
+  testCompile('org.assertj:assertj-core')
+}

@@ -1,0 +1,17 @@
+description = 'modele'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+}
+
+dependencies {
+  compile('org.springframework.boot:spring-boot-starter-actuator')
+  compile('org.springframework.boot:spring-boot-starter-webflux')
+  compile('org.projectlombok:lombok')
+  compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
+}
