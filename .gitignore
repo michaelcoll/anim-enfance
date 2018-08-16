@@ -8,8 +8,9 @@ node_modules
 
 ### Build dirs
 target
-/dist
+dist
 out
+build
 .gradle
 
 ### local env files
