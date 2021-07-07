@@ -1,0 +1,12 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+subprojects {
+  apply plugin: 'idea'
+  apply plugin: 'io.spring.dependency-management'
+
+  dependencyManagement {
+    imports {
+      mavenBom SpringBootPlugin.BOM_COORDINATES
+    }
+  }
+}

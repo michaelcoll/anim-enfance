@@ -1,0 +1,9 @@
+description = 'common-service'
+
+dependencies {
+  compile project(':back:modele')
+  compile('org.springframework.boot:spring-boot-starter-security')
+  compile('org.springframework.session:spring-session-data-mongodb')
+  compile('com.google.guava:guava:25.1-jre')
+  testCompile('org.springframework.boot:spring-boot-starter-test')
+}

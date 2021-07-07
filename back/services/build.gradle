@@ -1,0 +1,14 @@
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'org.springframework.boot'
+  apply plugin: 'com.palantir.docker'
+
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+
+}

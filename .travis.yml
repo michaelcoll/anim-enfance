@@ -10,7 +10,7 @@ matrix:
        - cd back
      script:
 #       - mvn package jacoco:report coveralls:report -DrepoToken=$COVERALL_TOKEN
-       - mvn package
+       - gradle build docker
        - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-partner-service:latest michaelcoll/ae-partner-service:$TRAVIS_TAG ; fi
        - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-structure-service:latest michaelcoll/ae-structure-service:$TRAVIS_TAG ; fi
        - if [[ ! -z "$TRAVIS_TAG" ]]; then docker tag michaelcoll/ae-user-service:latest michaelcoll/ae-user-service:$TRAVIS_TAG ; fi

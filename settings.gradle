@@ -1,0 +1,19 @@
+rootProject.name = 'anim-enfance'
+
+include ':back'
+include ':back:modele'
+include ':back:common:common-service'
+include ':back:common:common-service-test'
+include ':back:services:structure-service'
+include ':back:services:partner-service'
+include ':back:services:user-service'
+include ':back:services'
+
+project(':back').projectDir = "$rootDir/back" as File
+project(':back:modele').projectDir = "$rootDir/back/modele" as File
+project(':back:common:common-service').projectDir = "$rootDir/back/common/common-service" as File
+project(':back:common:common-service-test').projectDir = "$rootDir/back/common/common-service-test" as File
+project(':back:services:structure-service').projectDir = "$rootDir/back/services/structure-service" as File
+project(':back:services:partner-service').projectDir = "$rootDir/back/services/partner-service" as File
+project(':back:services:user-service').projectDir = "$rootDir/back/services/user-service" as File
+project(':back:services').projectDir = "$rootDir/back/services" as File

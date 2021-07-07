@@ -1,0 +1,6 @@
+description = 'common-service-test'
+dependencies {
+  compile project(':back:common:common-service')
+  compile('org.springframework.boot:spring-boot-starter-test')
+  compile('io.projectreactor:reactor-test')
+}
